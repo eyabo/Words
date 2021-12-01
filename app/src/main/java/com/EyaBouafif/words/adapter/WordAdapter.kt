@@ -1,6 +1,8 @@
 package com.EyaBouafif.words.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +55,7 @@ class WordAdapter(private val letterId: String, context: Context) :
         layout.accessibilityDelegate = Accessibility
 
         return WordViewHolder(layout)
+
     }
 
     /**
@@ -66,6 +69,11 @@ class WordAdapter(private val letterId: String, context: Context) :
 
         // Set the text of the WordViewHolder
         holder.button.text = item
+        holder.button.setOnClickListener {
+            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}${item}")
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+            context.startActivity(intent)
+        }
 
     }
 
